@@ -1,0 +1,605 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Adaptive Motorcycle Stand | Biomimetic Stability System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root{
+    --bg:#0a0a0a;
+    --surface:#111111;
+    --surface-2:#1b1b1b;
+    --text:#ffffff;
+    --muted:#b3b3b3;
+    --accent:#7cff4f;
+    --accent-2:#d6ffca;
+    --border:rgba(255,255,255,0.08);
+    --max:1200px;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:'Inter', sans-serif;
+    background:#000;
+    color:var(--text);
+    line-height:1.7;
+}
+
+img{
+    max-width:100%;
+    display:block;
+}
+
+a{
+    text-decoration:none;
+    color:inherit;
+}
+
+.container{
+    width:min(var(--max), calc(100% - 48px));
+    margin:auto;
+}
+
+/* NAVBAR */
+nav{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    z-index:1000;
+    background:rgba(0,0,0,0.75);
+    backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--border);
+}
+
+.nav-inner{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:18px 0;
+}
+
+.logo{
+    font-size:1.1rem;
+    font-weight:800;
+    letter-spacing:1px;
+}
+
+.logo span{
+    color:var(--accent);
+}
+
+.nav-links{
+    display:flex;
+    gap:28px;
+    align-items:center;
+}
+
+.nav-links a{
+    color:#ddd;
+    font-size:0.95rem;
+    transition:0.3s;
+}
+
+.nav-links a:hover{
+    color:#fff;
+}
+
+.btn{
+    display:inline-block;
+    padding:14px 28px;
+    border-radius:999px;
+    font-weight:600;
+    transition:0.3s;
+}
+
+.btn-primary{
+    background:var(--accent);
+    color:#000;
+}
+
+.btn-primary:hover{
+    transform:translateY(-2px);
+    box-shadow:0 10px 30px rgba(124,255,79,0.25);
+}
+
+/* HERO */
+.hero{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    background:
+        radial-gradient(circle at 70% 30%, rgba(124,255,79,0.15), transparent 35%),
+        linear-gradient(180deg, #050505 0%, #000 100%);
+}
+
+.hero-grid{
+    display:grid;
+    grid-template-columns:1.1fr 0.9fr;
+    gap:60px;
+    align-items:center;
+}
+
+.eyebrow{
+    color:var(--accent);
+    font-weight:600;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    font-size:0.85rem;
+    margin-bottom:20px;
+}
+
+.hero h1{
+    font-size:clamp(3rem, 7vw, 6.5rem);
+    line-height:0.95;
+    font-weight:800;
+    letter-spacing:-3px;
+    margin-bottom:24px;
+}
+
+.hero p{
+    color:var(--muted);
+    font-size:1.1rem;
+    max-width:620px;
+    margin-bottom:34px;
+}
+
+.hero-stats{
+    display:flex;
+    gap:40px;
+    margin-top:30px;
+}
+
+.stat h3{
+    font-size:2rem;
+    color:var(--accent);
+}
+
+.stat p{
+    margin:0;
+    font-size:0.9rem;
+    color:#888;
+}
+
+.product-visual{
+    position:relative;
+    height:560px;
+    border-radius:28px;
+    background:
+        radial-gradient(circle at 50% 30%, rgba(124,255,79,0.25), transparent 35%),
+        linear-gradient(145deg, #1a1a1a, #080808);
+    border:1px solid var(--border);
+    overflow:hidden;
+}
+
+.product-visual::before{
+    content:"";
+    position:absolute;
+    inset:12%;
+    border-radius:24px;
+    background:
+        linear-gradient(135deg, rgba(255,255,255,0.08), transparent),
+        url('https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=1000&q=80')
+        center/cover;
+    opacity:0.9;
+}
+
+.product-label{
+    position:absolute;
+    bottom:30px;
+    left:30px;
+    background:rgba(0,0,0,0.65);
+    padding:14px 20px;
+    border-radius:14px;
+    border:1px solid var(--border);
+}
+
+/* SECTION */
+section{
+    padding:110px 0;
+}
+
+.section-head{
+    margin-bottom:50px;
+}
+
+.section-head h2{
+    font-size:clamp(2.2rem, 4vw, 4rem);
+    line-height:1.05;
+    letter-spacing:-2px;
+    margin-bottom:16px;
+}
+
+.section-head p{
+    max-width:720px;
+    color:var(--muted);
+}
+
+/* FEATURE CARDS */
+.grid-3{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:24px;
+}
+
+.card{
+    background:linear-gradient(180deg, #141414, #0c0c0c);
+    border:1px solid var(--border);
+    border-radius:24px;
+    padding:34px;
+}
+
+.card .icon{
+    font-size:2rem;
+    margin-bottom:18px;
+}
+
+.card h3{
+    font-size:1.3rem;
+    margin-bottom:12px;
+}
+
+.card p{
+    color:var(--muted);
+}
+
+/* STORY SECTION */
+.story{
+    background:#050505;
+}
+
+.story-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:40px;
+}
+
+.story-block{
+    padding:40px;
+    border-radius:24px;
+    background:linear-gradient(180deg, #151515, #0c0c0c);
+    border:1px solid var(--border);
+}
+
+.story-block h3{
+    margin-bottom:14px;
+    font-size:1.4rem;
+}
+
+/* COMPARISON */
+.table-wrap{
+    overflow-x:auto;
+    border:1px solid var(--border);
+    border-radius:24px;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    background:#0b0b0b;
+}
+
+th, td{
+    padding:20px 24px;
+    border-bottom:1px solid var(--border);
+    text-align:left;
+}
+
+th{
+    background:#141414;
+    font-weight:700;
+}
+
+td{
+    color:#d4d4d4;
+}
+
+.highlight{
+    color:var(--accent);
+    font-weight:600;
+}
+
+/* CTA */
+.cta{
+    text-align:center;
+    padding:120px 0;
+    background:
+        radial-gradient(circle at center, rgba(124,255,79,0.08), transparent 40%),
+        #020202;
+}
+
+.cta h2{
+    font-size:clamp(2.5rem, 5vw, 5rem);
+    line-height:1;
+    letter-spacing:-2px;
+    margin-bottom:20px;
+}
+
+.cta p{
+    max-width:760px;
+    margin:0 auto 34px;
+    color:var(--muted);
+}
+
+/* FOOTER */
+footer{
+    padding:36px 0;
+    border-top:1px solid var(--border);
+    color:#888;
+    font-size:0.95rem;
+    text-align:center;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px){
+    .hero-grid,
+    .story-grid,
+    .grid-3{
+        grid-template-columns:1fr;
+    }
+
+    .product-visual{
+        height:420px;
+    }
+
+    .nav-links{
+        display:none;
+    }
+
+    .hero-stats{
+        flex-wrap:wrap;
+        gap:20px;
+    }
+}
+</style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav>
+    <div class="container nav-inner">
+        <div class="logo">Adaptive<span>Stand</span></div>
+        <div class="nav-links">
+            <a href="#problem">Problem</a>
+            <a href="#technology">Technology</a>
+            <a href="#comparison">Comparison</a>
+            <a href="#materials">Materials</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+    <div class="container hero-grid">
+        <div>
+            <div class="eyebrow">Biomimetic Engineering</div>
+            <h1>Stability.<br>Inspired by Nature.</h1>
+            <p>
+                A next-generation motorcycle side stand engineered to prevent slipping on wet roads
+                and sinking into mud or sand. Inspired by the human foot, gecko grip, and shoulder joint.
+            </p>
+            <a href="#problem" class="btn btn-primary">Discover the Technology</a>
+
+            <div class="hero-stats">
+                <div class="stat">
+                    <h3>3×</h3>
+                    <p>More surface grip</p>
+                </div>
+                <div class="stat">
+                    <h3>50%</h3>
+                    <p>Better load distribution</p>
+                </div>
+                <div class="stat">
+                    <h3>360°</h3>
+                    <p>Adaptive joint movement</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="product-visual">
+            <div class="product-label">
+                <strong>Adaptive Motorcycle Stand</strong><br>
+                Anti-slip. Anti-sink. Auto-lock.
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- PROBLEM -->
+<section id="problem">
+    <div class="container">
+        <div class="section-head">
+            <h2>The Problem with Conventional Side Stands</h2>
+            <p>
+                Standard motorcycle stands use a small metal foot that can slip on wet surfaces
+                and sink into mud or sand. This causes the motorcycle to tilt and potentially fall.
+            </p>
+        </div>
+
+        <div class="grid-3">
+            <div class="card">
+                <div class="icon">🌧️</div>
+                <h3>Slips on Wet Roads</h3>
+                <p>Low-friction metal feet lose traction on rain-soaked pavement and tiles.</p>
+            </div>
+
+            <div class="card">
+                <div class="icon">🏖️</div>
+                <h3>Sinks into Soft Ground</h3>
+                <p>Narrow contact areas concentrate load into mud, sand, and loose gravel.</p>
+            </div>
+
+            <div class="card">
+                <div class="icon">⚠️</div>
+                <h3>Risk of Falling</h3>
+                <p>Unstable support can cause expensive vehicle damage and safety hazards.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- TECHNOLOGY -->
+<section id="technology" class="story">
+    <div class="container">
+        <div class="section-head">
+            <h2>How the Product Works</h2>
+            <p>
+                Three biological inspirations combine to create a highly stable parking system.
+            </p>
+        </div>
+
+        <div class="story-grid">
+            <div class="story-block">
+                <h3>🦶 Human Foot-Inspired Base</h3>
+                <p>
+                    The broad sole-shaped base spreads the motorcycle's weight over a larger
+                    area, reducing pressure and preventing sinking into soft terrain.
+                </p>
+            </div>
+
+            <div class="story-block">
+                <h3>🦎 Gecko-Inspired Grip</h3>
+                <p>
+                    A micro-textured TPU pad increases surface friction, improving traction
+                    on wet, smooth, and slippery ground.
+                </p>
+            </div>
+
+            <div class="story-block">
+                <h3>💪 Shoulder Joint Mechanism</h3>
+                <p>
+                    The rotational pivot allows the base to align naturally with uneven
+                    surfaces for full ground contact.
+                </p>
+            </div>
+
+            <div class="story-block">
+                <h3>🔒 Passive Auto-Locking</h3>
+                <p>
+                    Once the motorcycle's weight is applied, the stand locks securely in
+                    place without requiring electronics.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FEATURES -->
+<section>
+    <div class="container">
+        <div class="section-head">
+            <h2>Premium Materials</h2>
+            <p>
+                Lightweight, corrosion-resistant materials engineered for long-term performance.
+            </p>
+        </div>
+
+        <div class="grid-3">
+            <div class="card">
+                <h3>Forged Aluminum Alloy</h3>
+                <p>Main structural body with high strength and low weight.</p>
+            </div>
+
+            <div class="card">
+                <h3>High-Density TPU</h3>
+                <p>Micro-textured foot pad for exceptional traction.</p>
+            </div>
+
+            <div class="card">
+                <h3>Stainless Steel Spring</h3>
+                <p>Durable internal tension spring with corrosion resistance.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- COMPARISON -->
+<section id="comparison">
+    <div class="container">
+        <div class="section-head">
+            <h2>Compared to Existing Products</h2>
+            <p>
+                Designed to outperform traditional motorcycle stands in real-world conditions.
+            </p>
+        </div>
+
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Feature</th>
+                        <th>Conventional Stand</th>
+                        <th>Adaptive Stand</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Base Shape</td>
+                        <td>Small flat metal foot</td>
+                        <td class="highlight">Foot-inspired wide base</td>
+                    </tr>
+                    <tr>
+                        <td>Grip</td>
+                        <td>Plain metal surface</td>
+                        <td class="highlight">Gecko-inspired texture</td>
+                    </tr>
+                    <tr>
+                        <td>Soft Ground Support</td>
+                        <td>Sinks easily</td>
+                        <td class="highlight">Distributes load evenly</td>
+                    </tr>
+                    <tr>
+                        <td>Uneven Terrain</td>
+                        <td>Limited contact</td>
+                        <td class="highlight">Adaptive pivot alignment</td>
+                    </tr>
+                    <tr>
+                        <td>Locking</td>
+                        <td>Spring only</td>
+                        <td class="highlight">Passive load locking</td>
+                    </tr>
+                    <tr>
+                        <td>Safety</td>
+                        <td>Moderate</td>
+                        <td class="highlight">High stability</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+<section id="contact" class="cta">
+    <div class="container">
+        <h2>Redefining Motorcycle Stability</h2>
+        <p>
+            Our biomimetic adaptive stand brings nature-inspired engineering to everyday riding.
+            Safer parking on wet, muddy, sandy, and uneven surfaces.
+        </p>
+        <a href="mailto:your@email.com" class="btn btn-primary">Contact Us</a>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    © 2026 AdaptiveStand — No backend required. This is a static website built with HTML and CSS.
+</footer>
+
+</body>
+</html>
